@@ -1,8 +1,8 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import csv
-import HitNode as node
-def HITS(filename, early_stopping, plot_time):
+import PRNode as node
+def PageRank(filename, early_stopping, plot_time):
     G = node.Graph()
     # read csv and create graph
     with open(filename, newline='') as csvfile:
@@ -33,19 +33,19 @@ def HITS(filename, early_stopping, plot_time):
                     n2.addParent(n)
     # iteration
     for i in range(10000):
-        G.hits_iter()
-        if((G.cal_authority() + G.cal_hub()) < early_stopping):
+        G.PR_iter()
+        if((G.cal_PR()) < early_stopping):
             break;
     # print picture
-    diff_auth_hub = list(zip(G.iter_hub[:plot_time] ,G.iter_auth[:plot_time])) 
+    diff_auth_hub = G.iter_pr[:plot_time] 
     plt.plot(range(1, plot_time + 1), diff_auth_hub)
     plt.yscale('log')
-    plt.title("graph 6")
+    plt.title("graph 1")
     plt.xlabel('iteration times')
     plt.ylabel('mean variance')
     plt.show()
-                                                                                                                                                                           
+                                                                                                                                        
 if __name__ == "__main__":
     early_stopping = 10 ** -15
-    plot_time = 40
-    HITS('./hw3dataset/graph_6.txt', early_stopping, plot_time)
+    plot_time = 20
+    PageRank('./hw3dataset/graph_1.txt', early_stopping, plot_time)
