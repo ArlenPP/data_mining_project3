@@ -4,6 +4,7 @@ import numpy as np
 import csv
 from CommonUtil import read_csv_file
 import time
+
 def SimRank(filename, early_stopping, plot_time):
     G = node.Graph()
     # c = 0.5直接設定在G裡面了
